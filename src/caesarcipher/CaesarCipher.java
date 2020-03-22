@@ -4,6 +4,12 @@ import java.io.PrintWriter;
 
 public class CaesarCipher {
 
+	/**
+	 * Wrapped modular 
+	 * @param mod
+	 * @param a
+	 * @return a (mod) mod
+	 */
 	public static int wrappedMod(int mod, int a) {
 		return ((a % mod) < 0) ? ((a % mod) + mod) : (a % mod);
 	} // wrappedMod(int, int)
@@ -15,7 +21,7 @@ public class CaesarCipher {
 	 * @param alpha
 	 * @return shifted Character
 	 */
-	public static char caesarShift(int n, char ch, String option) throws IllegalArgumentException{
+	public static char caesarShift(int n, char ch, String option) throws IllegalArgumentException {
 
 		int base = (int) 'a';
 		int reBase = ((int) ch) - base;
@@ -30,14 +36,18 @@ public class CaesarCipher {
 			throw new IllegalArgumentException("Valid options are \"encode\" or \"decode\"");
 		}
 	} // casearShift(int, char, String)
-	
-	public static void caesarShiftLoop() {
-		
-	} // caesarShiftLoop(String, PenWriter)
+
+	public static void caesarShiftLoop(String str, String option, PrintWriter pen) {
+		for (int n = 0; n < 26; n++) {
+			pen.print("n = " + n + ": ");
+			for (int i = 0; i < str.length(); i++) {
+				pen.print(caesarShift(n, str.charAt(i), option));
+			}
+			pen.println();
+		}
+	} // caesarShiftLoop(String, String, PrintWriter)
 
 	public static void main(String args[]) throws Exception {
-		// task 2: think about cipher
-		// task 3: implement cipher
 
 		PrintWriter pen = new PrintWriter(System.out);
 
@@ -47,18 +57,15 @@ public class CaesarCipher {
 		}
 		switch (args[0]) {
 		case "encode":
-			pen.println("encode option " + caesarShift(1,'a', "encode"));
-			pen.flush();
-			break;
 		case "decode":
-			pen.println("decode option");
-			pen.flush();
+			caesarShiftLoop(args[1], args[0], pen);
 			break;
 		default:
 			System.err.println("Valid options are \"encode\" or \"decode\"");
 			System.exit(1);
 		}
-
-
+		pen.close();
 	} // main(String[])
 } // class CaesarCipher
+
+//Time taken: 80 minutes
