@@ -3,11 +3,15 @@ package caesarcipher;
 import java.io.PrintWriter;
 
 public class VigenereCipher {
-	//use wrapped mod to add to letter
-	//base and rebase
-	//it seems that the character array is immutable?
-	//use print
-	
+
+	/**
+	 * A static method of the Vigenere Cipher
+	 * 
+	 * @param str
+	 * @param key
+	 * @param option
+	 * @param pen
+	 */
 	public static void vigenereCipher(String str, String key, String option, PrintWriter pen) {
 		for (int i = 0; i < str.length(); i++) {
 			int base = (int) 'a';
@@ -46,3 +50,5 @@ public class VigenereCipher {
 		pen.close();
 	} // main(String[])
 }
+
+//Took 31 minutes
